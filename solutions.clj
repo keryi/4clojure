@@ -33,3 +33,22 @@
     (if (empty? bin)
       sum
       (recur (rest bin) (bit-shift-left pos 1) (if (= \1 (first bin)) (+ sum pos) sum)))))
+
+; Problem 88 Symmetric Difference
+(defn sym-diff [s1 s2]
+  (let [diff12 (clojure.set/difference s1 s2)
+        diff21 (clojure.set/difference s2 s1)]
+    (set (concat diff12 diff21))))
+
+(sym-diff #{1 2 3 4 5 6} #{1 3 5 7})
+(sym-diff #{:a :b :c} #{})
+(sym-diff #{} #{4 5 6})
+(sym-diff #{[1 2] [2 3]} #{[2 3] [3 4]})
+
+; Problem 143 Dot Product
+(defn dot-product [v1 v2]
+  (reduce + (map #(reduce * %) (partition 2 (interleave v1 v2)))))
+
+(dot-product [1 2] [3 4])
+(dot-product [0 1 0] [1 0 0])
+(dot-product [1 1 1] [1 1 1])
