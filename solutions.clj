@@ -52,3 +52,25 @@
 (dot-product [1 2] [3 4])
 (dot-product [0 1 0] [1 0 0])
 (dot-product [1 1 1] [1 1 1])
+
+; Problem 135 Infix Calculator
+(defn infix-calc [one op two & args]
+  (loop [args args res (op one two)]
+    (if (empty? args)
+      res
+      (recur (rest (rest args)) ((first args) res (second args))))))
+
+(infix-calc 1 + 2)
+(infix-calc 1 + 2 - 3)
+(infix-calc 1 + 2 + 3 + 4 + 5)
+
+; Problem 157 Indexing Sequences
+(defn index-seq [seq]
+  (loop [seq seq res [] index 0]
+    (if (empty? seq)
+      res
+      (recur (rest seq) (conj res [(first res) index]) (inc index)))))
+
+(index-seq [:a :b :c])
+(index-seq [0 1 3])
+(index-seq [[:foo] {:bar :baz}])
