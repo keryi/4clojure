@@ -74,3 +74,14 @@
 (index-seq [:a :b :c])
 (index-seq [0 1 3])
 (index-seq [[:foo] {:bar :baz}])
+
+; Problem 97 Pascal Triangle
+(defn pascal-row [m]
+  (loop [i 1 c 1 row []]
+    (if (= (+ m 1) i)
+      row
+      (recur (inc i) (quot (* (- m i) c) i) (conj row c)))))
+
+(pascal-row 1)
+(pascal-row 11)
+(map pascal-row (range 1 6))
