@@ -85,3 +85,17 @@
 (pascal-row 1)
 (pascal-row 11)
 (map pascal-row (range 1 6))
+
+; Problem 120 Sum of Squared of Digits
+(defn small-sqr-digits [coll]
+  (let [sum-of-squared-digits (fn [x]
+                        (loop [digits x sum 0]
+                          (if (= digits 0)
+                            sum
+                            (recur (quot digits 10) (+ sum (* (rem digits 10) (rem digits 10)))))))]
+    (count (filter true? (map (fn [x] (< x (sum-of-squared-digits x))) coll)))))
+
+(small-sqr-digits (range 10))
+(small-sqr-digits (range 30))
+(small-sqr-digits (range 100))
+(small-sqr-digits (range 1000))
