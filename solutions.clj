@@ -99,3 +99,15 @@
 (small-sqr-digits (range 30))
 (small-sqr-digits (range 100))
 (small-sqr-digits (range 1000))
+
+; Problem 118 Re-implement Map
+(defn remap [f coll]
+  (if-not (empty? coll)
+    (lazy-seq
+      (cons (f (first coll)) (remap f (rest coll))))))
+
+(remap inc [1 2 3 4 5])
+(remap (fn [remap] nil) (range 10))
+(->> (remap inc (range))
+  (drop (dec 1000000))
+  (take 2))
