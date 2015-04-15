@@ -112,14 +112,41 @@
   (drop (dec 1000000))
   (take 2))
 
-; Problem 118 Re-implement Map
-(defn remap [f coll]
-  (if-not (empty? coll)
-    (lazy-seq
-      (cons (f (first coll)) (remap f (rest coll))))))
+; Problem 128 Recognize Playing Cards
+(defn recog-cards [sr]
+  (let [get-suit
+        (fn [s]
+          (cond
+           (= \D s) :diamond
+           (= \S s) :spade
+           (= \H s) :heart
+           (= \C s) :club))
+        get-rank
+        (fn [r]
+          (cond
+           (= \T r) 8
+           (= \J r) 9
+           (= \Q r) 10
+           (= \K r) 11
+           (= \A r) 12
+           :else (- (int r) (int \2))))]
+    {:suit (get-suit (first sr)) :rank (get-rank (second sr))}))
 
-(remap inc [1 2 3 4 5])
-(remap (fn [remap] nil) (range 10))
-(->> (remap inc (range))
-        (drop (dec 1000000))
-        (take 2))
+(recog-cards "DQ")
+(recog-cards "H5")
+(recog-cards "CA")
+(range 13)
+(map (comp :rank recog-cards str)
+
+; Problem 100 Least Common Multiple
+(defn lcm [& args]
+  (let [gcd (fn [x y]
+              (if (= y 0)
+                x
+                (recur y (mod x y))))
+        lcm (fn [a b]
+              (* (quot a (gcd a b)) b))]
+    (reduce lcm args)))
+
+(lcm 1 2 3)
+(lcm 5 3 7)
