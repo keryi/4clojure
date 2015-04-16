@@ -150,3 +150,10 @@
 
 (lcm 1 2 3)
 (lcm 5 3 7)
+
+; Problem 95 To Tree or Not To Tree
+(defn is-bintree? [s]
+  (or (nil? s)
+      (and (coll? s) (= (count s) 3) (every? is-bintree? (rest s)))))
+
+(is-bintree? '(:a (:b nil nil) nil))
