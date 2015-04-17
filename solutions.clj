@@ -172,3 +172,7 @@
       (if (= s1 s1s2)
         #{}
         (clojure.set/difference s1 s1s2)))))
+
+; Problem 62 Re-implement Iterate
+(fn iter [f x]
+  (cons x (lazy-seq (iter f (f x)))))
