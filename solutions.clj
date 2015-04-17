@@ -157,3 +157,18 @@
       (and (coll? s) (= (count s) 3) (every? is-bintree? (rest s)))))
 
 (is-bintree? '(:a (:b nil nil) nil))
+
+; Problem 66 Greatest Common Divisor
+(fn [x y]
+  (if (= y 0)
+    x
+    (recur y (mod x y))))
+
+; Problem 81 Set Intersection
+(fn [s1 s2]
+  (let [s1s2 (clojure.set/difference s1 s2) s2s1 (clojure.set/difference s1 s2)]
+    (if (empty? s1s2)
+      s1
+      (if (= s1 s1s2)
+        #{}
+        (clojure.set/difference s1 s1s2)))))
