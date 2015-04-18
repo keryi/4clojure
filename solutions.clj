@@ -176,3 +176,30 @@
 ; Problem 62 Re-implement Iterate
 (fn iter [f x]
   (cons x (lazy-seq (iter f (f x)))))
+
+; Problem 41 Drop Every Nth Item
+(fn [seq n]
+  (if (= n 0)
+    []
+    (loop [i 0 r []]
+      (if (= i (inc (count seq)))
+        r
+        (if (= (mod i n) 0)
+          (recur (inc i) r)
+          (recur (inc i) (conj r (get seq (dec i)))))))))
+
+; Problem 32 Duplicate a Sequence
+(fn [seq]
+  (let [duplicator (fn [coll n]
+                     (loop [c coll n n]
+                       (if (= n 0)
+                         c
+                         (recur (conj c (first c)) (dec n)))))]
+    (loop [s seq i 0 r ()]
+      (if (empty? s)
+        (reverse (duplicator r i))
+        (if (= i 0)
+          (recur (rest s) (inc i) (conj r (first s)))
+          (if (= (first r) (first s))
+            (recur (rest s) (inc i) (conj r (first s)))
+            (recur (rest s) 1 (conj (duplicator r i) (first s)))))))))
