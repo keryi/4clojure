@@ -203,3 +203,9 @@
           (if (= (first r) (first s))
             (recur (rest s) (inc i) (conj r (first s)))
             (recur (rest s) 1 (conj (duplicator r i) (first s)))))))))
+
+; Problem 27 Palindrome Detector
+(fn is-palindrome? [x]
+  (if (string? x)
+    (= x (clojure.string/join (reverse x)))
+    (= x (reverse x))))
