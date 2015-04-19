@@ -209,3 +209,12 @@
   (if (string? x)
     (= x (clojure.string/join (reverse x)))
     (= x (reverse x))))
+
+; Problem 30 Compress a Sequence
+(fn compress-seq [seq]
+  (loop [i 0 c []]
+    (if (= i (count seq))
+      c
+      (if (not= (last c) (get seq i))
+        (recur (inc i) (conj c (get seq i)))
+        (recur (inc i) c)))))
