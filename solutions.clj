@@ -225,3 +225,14 @@
     (if (empty? rcoll)
       result
       (recur (rest rcoll) (conj result sep (first rcoll))))))
+
+; Problem 31 Pack a Sequence
+(fn [seq]
+  (loop [s (rest seq) r () aux (list (first seq))]
+    (if (empty? s)
+      (if (not (empty? aux))
+        (reverse (conj r aux))
+        (reverse r))
+      (if (= (first s) (last aux))
+        (recur (rest s) r (conj aux (first s)))
+        (recur (rest s) (conj r aux) (list (first s)))))))
