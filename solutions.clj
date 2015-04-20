@@ -218,3 +218,10 @@
       (if (not= (last c) (get seq i))
         (recur (inc i) (conj c (get seq i)))
         (recur (inc i) c)))))
+
+; Problem 40 Interpose a Sequence
+(fn [sep coll]
+  (loop [rcoll (rest coll) result [(first coll)]]
+    (if (empty? rcoll)
+      result
+      (recur (rest rcoll) (conj result sep (first rcoll))))))
