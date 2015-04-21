@@ -236,3 +236,10 @@
       (if (= (first s) (last aux))
         (recur (rest s) r (conj aux (first s)))
         (recur (rest s) (conj r aux) (list (first s)))))))
+
+; Problem 42 Factorial Fun
+(fn [n]
+  (loop [n n fact 1]
+    (if (= n 1)
+      fact
+      (recur (dec n) (* n fact)))))
