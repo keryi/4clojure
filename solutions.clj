@@ -243,3 +243,11 @@
     (if (= n 1)
       fact
       (recur (dec n) (* n fact)))))
+
+; Problem 39 Interleave Two Seqs
+(fn [seq1 seq2]
+  (let [max (if (< (count seq1) (count seq2)) (count seq1) (count seq2))]
+  (loop [i 0 r [] rs1 seq1 rs2 seq2]
+    (if (= i max)
+      r
+      (recur (inc i) (conj r (first rs1) (first rs2)) (rest rs1) (rest rs2))))))
