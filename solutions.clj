@@ -251,3 +251,13 @@
     (if (= i max)
       r
       (recur (inc i) (conj r (first rs1) (first rs2)) (rest rs1) (rest rs2))))))
+
+; Problem 49 Split a Sequence
+(fn [n seq]
+  (loop [s seq n n aux [] r []]
+    (if (= n 0)
+      (loop [s2 s aux2 []]
+        (if (empty? s2)
+          (conj r aux aux2)
+          (recur (rest s2) (conj aux2 (first s2)))))
+      (recur (rest s) (dec n) (conj aux (first s)) r))))
