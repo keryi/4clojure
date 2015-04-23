@@ -261,3 +261,10 @@
           (conj r aux aux2)
           (recur (rest s2) (conj aux2 (first s2)))))
       (recur (rest s) (dec n) (conj aux (first s)) r))))
+
+; Problem 26 Fibonacci Sequence
+(fn [n]
+  (loop [i 2 fib-seq '(1 1)]
+    (if (= i n)
+      (sort fib-seq)
+      (recur (inc i) (conj fib-seq (+ (nth fib-seq 0) (nth fib-seq 1)))))))
