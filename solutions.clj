@@ -268,3 +268,18 @@
     (if (= i n)
       (sort fib-seq)
       (recur (inc i) (conj fib-seq (+ (nth fib-seq 0) (nth fib-seq 1)))))))
+
+; Problem 50 Split By Type
+(fn split-by-type [coll]
+  (loop [coll coll nb [] st [] kw [] sq []]
+    (if (empty? coll)
+      (remove empty? (conj [nb] st kw sq))
+      (cond
+       (keyword? (first coll))
+          (recur (rest coll) nb st (conj kw (first coll)) sq)
+       (string? (first coll))
+          (recur (rest coll) nb (conj st (first coll)) kw sq)
+       (number? (first coll))
+          (recur (rest coll) (conj nb (first coll)) st kw sq)
+       (coll? (first coll))
+          (recur (rest coll) nb st kw (conj sq (first coll)))))))
