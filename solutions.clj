@@ -283,3 +283,7 @@
           (recur (rest coll) (conj nb (first coll)) st kw sq)
        (coll? (first coll))
           (recur (rest coll) nb st kw (conj sq (first coll)))))))
+
+; Problem 43 Reverse Interleave
+(fn reverse-interleave [coll n]
+  (apply map list (partition n coll)))
