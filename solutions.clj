@@ -287,3 +287,11 @@
 ; Problem 43 Reverse Interleave
 (fn reverse-interleave [coll n]
   (apply map list (partition n coll)))
+
+; Problem 23 Reverse a Sequence
+(fn [coll]
+  (loop [c coll r ()]
+    (if (empty? c)
+      r
+      (recur (rest c) (conj r (first c))))))
+      
