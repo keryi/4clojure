@@ -294,4 +294,9 @@
     (if (empty? c)
       r
       (recur (rest c) (conj r (first c))))))
-      
+
+; Problem 70 Word Sorting
+(fn word-sort [s]
+  (sort #(compare (clojure.string/lower-case %1)
+                  (clojure.string/lower-case %2))
+  (clojure.string/split s #"\s+|\W+")))
